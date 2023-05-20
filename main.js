@@ -21,8 +21,8 @@ renderer.render(scene, camera);
 
 // Torus
 
-const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
+const geometry = new THREE.TorusGeometry(10, 2, 12, 48);
+const material = new THREE.MeshStandardMaterial({ color: 0x6447ff });
 const torus = new THREE.Mesh(geometry, material);
 
 scene.add(torus);
@@ -44,7 +44,7 @@ scene.add(pointLight, ambientLight);
 // const controls = new OrbitControls(camera, renderer.domElement);
 
 function addStar() {
-  const geometry = new THREE.SphereGeometry(0.25, 24, 24);
+  const geometry = new THREE.SphereGeometry(0.2, 20, 20);
   const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
   const star = new THREE.Mesh(geometry, material);
 
@@ -65,11 +65,11 @@ scene.background = spaceTexture;
 
 // Avatar
 
-const jeffTexture = new THREE.TextureLoader().load('jeff.png');
+const meTexture = new THREE.TextureLoader().load('me.jpg');
 
-const jeff = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: jeffTexture }));
+const me = new THREE.Mesh(new THREE.BoxGeometry(2.5, 2.5,2.5), new THREE.MeshBasicMaterial({ map: meTexture }));
 
-scene.add(jeff);
+scene.add(me);
 
 // Moon
 
@@ -89,19 +89,22 @@ scene.add(moon);
 moon.position.z = 30;
 moon.position.setX(-10);
 
-jeff.position.z = -5;
-jeff.position.x = 2;
+me.position.z = -5;
+me.position.x = 2;
 
 // Scroll Animation
 
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
-  moon.rotation.x += 0.05;
-  moon.rotation.y += 0.075;
-  moon.rotation.z += 0.05;
+  moon.rotation.x += 0.025;
+  moon.rotation.y += 0.015;
+  moon.rotation.z += 0.025;
+  moon.position.x -= 0.025;
 
-  jeff.rotation.y += 0.01;
-  jeff.rotation.z += 0.01;
+
+  me.rotation.x += 0.05;
+  me.rotation.y += 0.075;
+  me.rotation.z += 0.05;
 
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
@@ -122,6 +125,8 @@ function animate() {
 
   moon.rotation.x += 0.005;
 
+  me.rotation.x += 0.006;
+  me.rotation.y += 0.001;
   // controls.update();
 
   renderer.render(scene, camera);
